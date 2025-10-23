@@ -7,9 +7,9 @@ export default class Experience {
             width: window.innerWidth,
             height: window.innerHeight,
         }
-        this.canvas = document.querySelector('.webgl'); // approx 10min
+        this.canvas = document.querySelector('.webgl');
 
-        // Scène
+        // Scene
         this.scene = new THREE.Scene();
         this.clock = new THREE.Clock();
         console.log(this.clock);
@@ -34,13 +34,14 @@ export default class Experience {
     }
 
     createCamera(){
-        // Caméra
+        // Camera
         this.camera = new THREE.PerspectiveCamera(75, this.sizes.width / this.sizes.height);
         this.camera.position.x = -20;
         this.camera.position.y = -1;
         this.camera.position.z = -30;
         this.scene.add(this.camera);
 
+        // Ajout orbit controls
         this.controls = new OrbitControls(this.camera, this.canvas);
         this.controls.enableDamping = true;
     }
@@ -57,6 +58,7 @@ export default class Experience {
     }
 
     createSphere(){
+        // Sphere
         const geometry = new THREE.SphereGeometry(15, 64, 64);
         const material = new THREE.MeshMatcapMaterial({
             color: '#ff00ff',
@@ -66,6 +68,7 @@ export default class Experience {
     }
 
     createTorus(){
+        // Torus
         const geometry = new THREE.TorusKnotGeometry(10, 3, 48, 32);
         const material = new THREE.MeshBasicMaterial({
             color: '#ADFC92',
@@ -79,6 +82,7 @@ export default class Experience {
     }
 
     createIsosphere(){
+        // Isosphere
         const geometry = new THREE.IcosahedronGeometry(15, 1);
         const material = new THREE.MeshBasicMaterial({
             color: '#1365ff',
@@ -92,6 +96,7 @@ export default class Experience {
     }
 
     createCylindre(){
+        // Cylindre
         const geometry = new THREE.CylinderGeometry(5, 5, 60, 30);
         const material = new THREE.MeshBasicMaterial({
             color: '#ffc813',
@@ -128,15 +133,15 @@ export default class Experience {
     }
 
     resize(){
-        // Update sizes
+        // Maj sizes
         this.sizes.width = window.innerWidth;
         this.sizes.height = window.innerHeight;
 
-        // Update camera
+        // Maj camera
         this.camera.aspect = this.sizes.width / this.sizes.height;
         this.camera.updateProjectionMatrix();
 
-        // Update renderer
+        // Maj renderer
         this.renderer.setSize(this.sizes.width, this.sizes.height);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.renderer.render(this.scene, this.camera);
